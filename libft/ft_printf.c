@@ -6,25 +6,10 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 18:06:45 by mairivie          #+#    #+#             */
-/*   Updated: 2024/09/09 15:10:18 by mairivie         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:57:18 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// printf (print formated) - format and print data.
-
-// Minimalist printf reimplementation handling basic format specifiers: 
-// %c, %p, %s, %d, %i, %u, %x, %X. Format string must be the first argument, 
-// followed by variable arguments.
-
-// Format specifiers
-// % 	% followed by another % character writes % to the screen.
-// c 	writes a single character.
-// s 	writes a character string.
-// p 	writes an implementation-defined character sequence defining a 
-//		pointer address.
-// d or i 	writes a signed integer to decimal representation.
-// u 	writes an unsigned integer to decimal representation.
-// x or X 	writes an unsigned int to hexadecimal representation (min or MAJ).
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -52,6 +37,19 @@ int	ft_print_type(char a, va_list args)
 	return (length);
 }
 
+// printf (print formated) - format and print data.
+// Minimalist printf reimplementation handling basic format specifiers: 
+// %c, %p, %s, %d, %i, %u, %x, %X. Format string must be the first argument, 
+// followed by variable arguments.
+// Format specifiers
+// c 	writes a single character.
+// s 	writes a character string.
+// p 	writes an implementation-defined character sequence defining a 
+//		pointer address.
+// d or i 	writes a signed integer to decimal representation.
+// u 	writes an unsigned integer to decimal representation.
+// x or X 	writes an unsigned int to hexadecimal representation (min or MAJ).
+// % 	% followed by another % character writes % to the screen.
 int	ft_printf(const char *format, ...)
 {
 	va_list	list_args;

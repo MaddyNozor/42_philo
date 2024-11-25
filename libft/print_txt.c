@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:45:54 by mairivie          #+#    #+#             */
-/*   Updated: 2024/09/09 15:11:04 by mairivie         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:59:56 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,15 @@ int	ft_print_char(char c)
 
 int	ft_print_string(char *str)
 {
-	int	i;
+	int	len;
 
-	i = 0;
+	len = 0;
 	if (str == NULL)
 	{
 		ft_print_string("(null)");
 		return (6);
 	}
-	while (str[i] != '\0')
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
-	return (i);
+	len = ft_strlen(str);
+	write(1, str, len);
+	return (len);
 }
