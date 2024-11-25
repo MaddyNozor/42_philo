@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:09:34 by mairivie          #+#    #+#             */
-/*   Updated: 2024/11/25 19:39:12 by mairivie         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:43:08 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int ac, char **av)
 			return (FAILURE);
 	while (i < nb_philo)
 	{
-		pthread_create(&agora[i], NULL, ft_hello, &i);
+		pthread_create(&agora[i], NULL, ft_hello, &i); //TODO : proteger pthread_create
 		++i;
 	}
 	i = 0;
