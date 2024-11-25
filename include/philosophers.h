@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:29:11 by mairivie          #+#    #+#             */
-/*   Updated: 2024/11/19 17:36:57 by mairivie         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:25:27 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@
 # include <stdbool.h>
 # include <limits.h>
 # include <stdio.h> // printf pour les tests
+# include <pthread.h> // toolbox for threads
 
 //--------------------- DEFINES -----------------------------
 
-#define FAILURE 1
-#define SUCCESS 0
+# define FAILURE 1
+# define SUCCESS 0
 
 //--------------------- STRUCTURES -----------------------------
 
