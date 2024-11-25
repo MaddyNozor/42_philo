@@ -6,18 +6,57 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:09:34 by mairivie          #+#    #+#             */
-/*   Updated: 2024/11/25 18:01:04 by mairivie         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:39:12 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+void	*ft_hello(void *philo_name)
+{
+	static pthread_mutex_t print_mutex;
+
+	//pthread_mutex_init(&print_mutex, NULL);
+	pthread_mutex_lock(&print_mutex);
+	ft_printf("Hello, World ! I'm philo %i.\n", philo_name);
+	pthread_mutex_unlock(&print_mutex);
+	//pthread_mutex_destroy(&print_mutex);
+	return (NULL);
+}
+
 int	main(int ac, char **av)
 {
+	int	nb_philo;
+	pthread_t *agora;
+	int i;
+	
 	if(check_parsing(ac, av) == FAILURE)
 		return (FAILURE);
+	nb_philo = ft_atoi(av[1]);
+	i = 0;
+	agora  = malloc(sizeof(pthread_t) * nb_philo);
+		if (agora == NULL)
+			return (FAILURE);
+	while (i < nb_philo)
+	{
+		pthread_create(&agora[i], NULL, ft_hello, &i);
+		++i;
+	}
+	i = 0;
+	while (i < nb_philo)
+	{
+		pthread_join(agora[i], NULL);
+		++i;
+	}
+	free(agora);
 	return (SUCCESS);
 }
+
+
+
+
+// NOTES DIVERSES
+
 
 // 	static char	*nb_philo;
 // 	static char	*time_to_die;
@@ -35,3 +74,8 @@ int	main(int ac, char **av)
 // 	time_to_sleep = av[4];
 // 	if (ac == 6) //TODO y a ce cas a gerer. tsss clean code a faire
 // 		nb_time_must_eat = av[5];
+
+
+    // pthread_mutex_lock(&print_mutex); // Début de la section critique
+    // printf("Hello, World! I'm philo %d.\n", philo_num);
+    // pthread_mutex_unlock(&print_mutex); // Fin de la section critique

@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:29:11 by mairivie          #+#    #+#             */
-/*   Updated: 2024/11/25 17:25:27 by mairivie         ###   ########.fr       */
+/*   Updated: 2024/11/25 18:51:50 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,7 @@
 //--------------------- FONCTION -----------------------------
 
 int	check_parsing(int ac, char **av);
+long	ft_atol(const char *str);
+void	*ft_hello(void *philo_name);
 
 #endif
