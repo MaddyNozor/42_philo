@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:29:11 by mairivie          #+#    #+#             */
-/*   Updated: 2024/11/26 16:40:09 by mairivie         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:23:31 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@
 # include <limits.h>
 # include <pthread.h> // toolbox for threads
 # include <stdbool.h>
-# include <string.h>
 # include <stdio.h> // printf pour les tests
 # include <stdlib.h>
-# include <unistd.h> //
+# include <string.h>
+# include <unistd.h>
+# include <sys/time.h>
 
 //--------------------- DEFINES -----------------------------
 
@@ -34,6 +35,7 @@ typedef struct s_philo
 {
 	pthread_t	thread;
 	int			namber;
+	long		start_time_philo;
 }				t_philo;
 
 typedef struct s_prog_data
@@ -44,6 +46,7 @@ typedef struct s_prog_data
 	int			time_to_eat;
 	int			time_to_sleep;
 	int			nb_time_must_eat;
+	long		start_time;
 }				t_prog_data;
 
 //--------------------- FONCTION -----------------------------
@@ -52,6 +55,7 @@ int				check_parsing(int ac, char **av);
 long			ft_atol(const char *str);
 void			*ft_hello(void *arg);
 int				ft_init_prog_data(int ac, char **av, t_prog_data *data);
+long			get_time(void);
 
 #endif
 

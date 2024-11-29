@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:09:34 by mairivie          #+#    #+#             */
-/*   Updated: 2024/11/26 18:42:17 by mairivie         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:42:40 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	main(int ac, char **av)
 	i = 0;
 	while (i < data.nb_philo)
 	{
+		//printf("philo namber %i my thread is %lu\n", data.agora[i].namber, data.agora[i].thread);
 		pthread_join(data.agora[i].thread, NULL);
 		++i;
 	}

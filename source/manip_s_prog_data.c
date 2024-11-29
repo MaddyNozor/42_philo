@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:16:57 by mairivie          #+#    #+#             */
-/*   Updated: 2024/11/26 18:31:28 by mairivie         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:00:39 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,25 @@ typedef struct s_prog_data {
 	int		time_to_die;
 	int		time_to_eat;
 	int		time_to_sleep;
-}				t_prog_data; 
+}		t_prog_data;
 */
 
 void	ft_init_philo(t_philo *philo)
 {
 	philo->namber++;
-	//philo.namber--;
-	//return (SUCCESS);
+	// philo.namber--;
+	// return (SUCCESS);
 }
 
 int	ft_init_agora(t_prog_data *data)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
 	while (i <= data->nb_philo)
 	{
-		//ft_init_philo(&data->agora[i]);
-		data->agora[i].namber = i;
-		printf("valeur i: %i - Philo ID: %i\n", i, data->agora[i].namber);
+		data->agora[i].start_time_philo = (long)get_time();
+		data->agora[i].namber = i + 1;
 		++i;
 	}
 	return (SUCCESS);
@@ -51,14 +50,13 @@ int	ft_init_prog_data(int ac, char **av, t_prog_data *data)
 	data->time_to_die = ft_atoi(av[2]);
 	data->time_to_eat = ft_atoi(av[3]);
 	data->time_to_sleep = ft_atoi(av[4]);
+	data->start_time = (long)get_time();
 	if (ac == 6)
 		data->nb_time_must_eat = ft_atoi(av[5]);
-	data->agora = ft_calloc(sizeof(t_philo), data->nb_philo +1);
+	data->agora = ft_calloc(sizeof(t_philo), data->nb_philo + 1);
 	if (data->agora == NULL)
 		return (FAILURE);
-	printf("Philo ID: %i\n", data->agora[2].namber);
 	if (ft_init_agora(data) == FAILURE)
 		return (FAILURE);
-	printf("Philo ID 2: %i\n", data->agora[2].namber);
 	return (SUCCESS);
 }

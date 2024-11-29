@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   speak_to_me.c                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 16:21:18 by mairivie          #+#    #+#             */
-/*   Updated: 2024/11/27 16:22:54 by mairivie         ###   ########.fr       */
+/*   Created: 2024/11/27 15:03:50 by mairivie          #+#    #+#             */
+/*   Updated: 2024/11/27 15:04:27 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	*ft_hello(void *arg)
+long	get_time(void)
 {
-	static pthread_mutex_t	print_mutex;
-	t_philo					*philo;
+	struct timeval time;
 
-	philo = (t_philo *)arg;
-	pthread_mutex_lock(&print_mutex);
-	printf("Hello, World ! I'm philo %d. It's %ld, we start %ld ms ago \n",
-		philo->namber, get_time(), get_time() - philo->start_time_philo);
-	pthread_mutex_unlock(&print_mutex);
-	return (NULL);
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
