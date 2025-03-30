@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:09:34 by mairivie          #+#    #+#             */
-/*   Updated: 2024/11/27 14:42:40 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/03/29 10:33:54 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	main(int ac, char **av)
 	if (ft_init_prog_data(ac, av, &data) == FAILURE)
 		return (FAILURE);
 	i = 0;
-	while (i < data.nb_philo)
+	i++;
+	/*while (i < data.nb_philo)
 	{
 		//printf("Philo ID before therad: %i\n", data.agora[i].namber);
 		pthread_create(&data.agora[i].thread, NULL, &ft_hello, &data.agora[i]);
@@ -39,7 +40,7 @@ int	main(int ac, char **av)
 		//printf("philo namber %i my thread is %lu\n", data.agora[i].namber, data.agora[i].thread);
 		pthread_join(data.agora[i].thread, NULL);
 		++i;
-	}
+	} */
 	free(data.agora);
 	
 	return (SUCCESS);

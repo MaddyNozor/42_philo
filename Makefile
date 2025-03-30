@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+         #
+#    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/16 15:29:24 by mairivie          #+#    #+#              #
-#    Updated: 2024/11/27 15:06:25 by mairivie         ###   ########.fr        #
+#    Updated: 2025/03/29 11:00:18 by codespace        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = philo
 
 
 COMPIL = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -I$(INCLUDE) -I$(LIBFT_INCLUDE)
+CFLAGS = -Wall -Wextra -Werror -g3 -pthread -I$(INCLUDE) -I$(LIBFT_INCLUDE)
 
 
 INCLUDE = include/

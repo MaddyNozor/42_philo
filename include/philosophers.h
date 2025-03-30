@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:29:11 by mairivie          #+#    #+#             */
-/*   Updated: 2024/11/27 15:23:31 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/03/29 10:51:14 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 //--------------------- INCLUDES -----------------------------
 # include "libft.h"
-# include <limits.h>
+# include <limits.h> // INTMAX
 # include <pthread.h> // toolbox for threads
 # include <stdbool.h>
 # include <stdio.h> // printf pour les tests
-# include <stdlib.h>
+# include <stdlib.h> // malloc, free
 # include <string.h>
 # include <unistd.h>
-# include <sys/time.h>
+# include <sys/time.h> //
 
 //--------------------- DEFINES -----------------------------
 
@@ -31,17 +31,26 @@
 
 //--------------------- STRUCTURES -----------------------------
 
+typedef	struct	s_chopstick
+{
+	pthread_mutex_t	mutex;
+	int				number;	
+}				t_chopstick;
+
+
 typedef struct s_philo
 {
+	t_chopstick	*left_stick;
+	t_chopstick *right_stick;
 	pthread_t	thread;
-	int			namber;
+	int			namber; // name + number t'as capté ?
 	long		start_time_philo;
 }				t_philo;
 
 typedef struct s_prog_data
 {
-	int			nb_philo;
 	t_philo		*agora;
+	int			nb_philo;
 	int			time_to_die;
 	int			time_to_eat;
 	int			time_to_sleep;
