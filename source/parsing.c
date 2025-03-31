@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:36:02 by mairivie          #+#    #+#             */
-/*   Updated: 2024/11/25 12:32:15 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/03/31 17:54:24 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ long	ft_atol(const char *str) //TODO mettre atol dans ma libft
 	return (sign * number);
 }
 
+
 bool	is_bigger_than_zero_and_smaller_than_int_max(char *string)
 {
 	long	long_to_check;
@@ -51,28 +52,35 @@ bool	is_bigger_than_zero_and_smaller_than_int_max(char *string)
 	return (true);
 }
 
-bool	looks_like_a_number(char *str)
+int	looks_like_an_int(char *str)
 {
 	int	i;
+	int	nb_len;
 
 	i = 0;
+	nb_len = 0;
+	while (ft_is_whitespace(str[i]) == true)
+		i++;
 	if ((str[i] == '+' || str[i] == '-') && (str[i + 1]))
 		i++;
 	while (str[i])
 	{
-		if (!(ft_isdigit(str[i])))
-			return (false);
+		if (ft_isdigit(str[i]) == false)
+			return (FAILURE);
 		i++;
+		nb_len++;
+		if (nb_len > 10)
+			return (ft_error("Argument too big, limit is INT_MAX."));
 	}
-	return (true);
+	return (SUCCESS);
 }
 
-bool	is_valid_int_number(char *str)
+int	is_valid_int_number(char *str)
 {
 	if (str == NULL || *str == '\0')
-		return (ft_printf("%s t'es vide\n", str), false);
-	if (looks_like_a_number(str) == false)
-		return (ft_printf("looks not like a long\n"), false);
+		return (ft_error("Empty String"));
+	if (looks_like_an_int(str) == FAILURE)
+		return (ft_error("Looks like your argument is not a valid int."));
 	if (is_bigger_than_zero_and_smaller_than_int_max(str) == false)
 		return (ft_printf("invalid range\n"), false);
 	return (true);
@@ -83,12 +91,12 @@ int	check_parsing(int ac, char **av)
 	int i;
 
 	if (ac < 5 || ac > 6)
-		return (ft_printf("nb arg error\n"), FAILURE);
+		return (ft_error("Need between 4 and 5 numeric arguments."));
 	i = 1;
 	while (av[i])
 	{
 		if (is_valid_int_number(av[i]) == false)
-			return(ft_printf("bad argument\n"), FAILURE);
+			return(ft_error("nombre invalide"));
 		++i;
 	}
 	return (SUCCESS);

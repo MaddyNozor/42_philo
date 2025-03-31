@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:09:34 by mairivie          #+#    #+#             */
-/*   Updated: 2025/03/29 10:33:54 by codespace        ###   ########.fr       */
+/*   Updated: 2025/03/31 16:52:44 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	main(int ac, char **av)
 {
-	int			i;
-	t_prog_data	data;
+	int				i;
+	t_data_table	data;
 
-	memset(&data, 0, sizeof(t_prog_data));
+//	memset(&data, 0, sizeof(t_data_table));
 	if (check_parsing(ac, av) == FAILURE)
 		return (FAILURE);
 	data.agora = ft_calloc(data.nb_philo, sizeof(t_philo));

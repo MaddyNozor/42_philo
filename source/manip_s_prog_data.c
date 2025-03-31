@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manip_s_prog_data.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:16:57 by mairivie          #+#    #+#             */
-/*   Updated: 2024/11/27 16:00:39 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/03/31 16:51:54 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_init_philo(t_philo *philo)
 	// return (SUCCESS);
 }
 
-int	ft_init_agora(t_prog_data *data)
+int	ft_init_agora(t_data_table *data)
 {
 	int	i;
 
@@ -44,7 +44,7 @@ int	ft_init_agora(t_prog_data *data)
 	return (SUCCESS);
 }
 
-int	ft_init_prog_data(int ac, char **av, t_prog_data *data)
+int	ft_init_prog_data(int ac, char **av, t_data_table *data)
 {
 	data->nb_philo = ft_atoi(av[1]);
 	data->time_to_die = ft_atoi(av[2]);
