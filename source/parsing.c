@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:36:02 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/01 14:43:26 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:53:08 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,6 @@ bool	is_bigger_than_intmax(long long_to_check)
 	return (false);
 }
 
-// bool	is_bigger_than_zero_and_smaller_than_int_max(char *string)
-// {
-// 	long	long_to_check;
-
-// 	long_to_check = ft_atol(string);
-// 	if (long_to_check < 1)
-// 		return (false);
-// 	if (long_to_check > INT_MAX)
-// 		return (false);
-// 	return (true);
-// }
-
 int	looks_like_an_int(char *str)
 {
 	int	i;
@@ -88,17 +76,6 @@ int	looks_like_an_int(char *str)
 	return (SUCCESS);
 }
 
-// int	is_valid_int_number(char *str)
-// {
-// 	if (str == NULL || *str == '\0')
-// 		return (ft_error("Empty String"));
-// 	if (looks_like_an_int(str) == FAILURE)
-// 		return (ft_error("Looks like your argument is not a valid int."));
-// 	if (is_bigger_than_zero_and_smaller_than_int_max(str) == false)
-// 		return (ft_printf("invalid range\n"), false);
-// 	return (true);
-// }
-
 int	check_parsing(int ac, char **av)
 {
 	int		i;
@@ -109,7 +86,7 @@ int	check_parsing(int ac, char **av)
 	i = 1;
 	while (av[i])
 	{
-		if (av[i] == NULL || av[i] == (void *)'\0')
+		if (av[i] == NULL || av[i] == (void *) '\0')
 			return (ft_error("Empty String is not a valid argument."));
 		if (looks_like_an_int(av[i]) == FAILURE)
 			return (ft_error("Looks like some arg are not valid int."));
