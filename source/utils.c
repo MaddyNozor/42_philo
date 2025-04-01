@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:03:50 by mairivie          #+#    #+#             */
-/*   Updated: 2025/03/31 17:35:32 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/01 13:55:59 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "../include/philosophers.h"
 
 //check if char c is a whitespace and return true or false accordingly.
 //  ‘ ‘ : Space
@@ -39,6 +39,6 @@ long	get_time(void)
 //return print the message then return FAILURE 
 int		ft_error(char *str)
 {
-	printf("Error: %s/n", str);
+	printf("Error: %s\n", str);
 	return (FAILURE);
 }

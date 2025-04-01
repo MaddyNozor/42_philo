@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:09:34 by mairivie          #+#    #+#             */
-/*   Updated: 2025/03/31 16:52:44 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/01 13:30:14 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "../include/philosophers.h"
 
 int	main(int ac, char **av)
 {
 	int				i;
-	t_data_table	data;
+	t_data_table	*data;
 
 //	memset(&data, 0, sizeof(t_data_table));
 	if (check_parsing(ac, av) == FAILURE)
 		return (FAILURE);
-	data.agora = ft_calloc(data.nb_philo, sizeof(t_philo));
-	if (data.agora == NULL)
+	data = ft_calloc(1, sizeof(t_data_table));
+	if (data == NULL)
 		return (FAILURE);
-	if (ft_init_prog_data(ac, av, &data) == FAILURE)
+	if (ft_init_prog_data(ac, av, data) == FAILURE)
 		return (FAILURE);
 	i = 0;
 	i++;
@@ -41,7 +41,7 @@ int	main(int ac, char **av)
 		pthread_join(data.agora[i].thread, NULL);
 		++i;
 	} */
-	free(data.agora);
+	free(data->agora);
 	
 	return (SUCCESS);
 }

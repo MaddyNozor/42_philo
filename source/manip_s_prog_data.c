@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   manip_s_prog_data.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:16:57 by mairivie          #+#    #+#             */
-/*   Updated: 2025/03/31 16:51:54 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/01 11:44:59 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "../include/philosophers.h"
 
 /*
 

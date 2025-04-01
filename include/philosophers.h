@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:29:11 by mairivie          #+#    #+#             */
-/*   Updated: 2025/03/31 12:00:50 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/01 14:12:41 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@
 
 typedef pthread_mutex_t		t_mutex;
 typedef pthread_t			t_thread;
-typedef t_chopstick			t_stick;
 typedef struct s_data_table	t_data_table;
 
 
@@ -45,6 +44,7 @@ typedef	struct	s_chopstick
 	int				stick_id;	
 }			t_chopstick;
 
+typedef t_chopstick			t_stick;
 
 typedef struct s_philo
 {
@@ -79,6 +79,10 @@ long			ft_atol(const char *str);
 void			*ft_hello(void *arg);
 int				ft_init_prog_data(int ac, char **av, t_data_table *data);
 long			get_time(void);
+bool			ft_is_whitespace(char c);
+int				ft_error(char *str);
+bool			is_negative(int nbr);
+bool			is_bigger_than_intmax(long long_to_check);
 
 #endif
 

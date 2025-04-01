@@ -6,11 +6,11 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:21:18 by mairivie          #+#    #+#             */
-/*   Updated: 2024/11/27 16:22:54 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/01 11:45:08 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "../include/philosophers.h"
 
 void	*ft_hello(void *arg)
 {
