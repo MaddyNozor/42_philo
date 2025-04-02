@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:16:57 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/01 17:58:57 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/02 18:50:15 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,7 @@ static void	*ft_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	printf("Hello my namber is %i ", philo->namber);
-	printf("and my thread_id=%lu \n", philo->id_thread);
-	// while (1)
-	// {
-	// 	sleep(philo->namber);
-	// 	printf("Hello my namber is %i ", philo->namber);
-	// }
+	printf("Hello my namber is %i and my thread id is %lu \n", philo->namber, philo->id_thread);
 	return (NULL);
 }
 
@@ -112,12 +106,15 @@ int	ft_init_philo(t_data_table *data)
 {
 	int i;
 
-	i = 0;
-	while (i < data->nb_philo)
+	i = 1;
+	while (i <= data->nb_philo)
 	{
+		data->agora[i].gap_last_meal = 0;
+		data->agora[i].full = false;
+		data->agora[i].nb_meals = 0;
+		data->agora[i].namber = i;
 		pthread_create(&data->agora[i].id_thread, NULL, ft_routine,
 			&data->agora[i]);
-		printf("creation thread %i\n", i);
 		i++;
 	}
 	return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:09:34 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/01 17:43:30 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/02 18:56:23 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ int	main(int ac, char **av)
 	if (ft_init_prog_data(ac, av, &data) == FAILURE)
 		return (FAILURE);
 	if (ft_init_philo(&data) == FAILURE)
+		return (FAILURE);
+	sleep(1);
+	printf("----- \n tous les philos sont la \n -----\n");
 	return (SUCCESS);
 }
 
