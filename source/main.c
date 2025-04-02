@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:09:34 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/01 13:30:14 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/01 17:43:30 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,14 @@
 
 int	main(int ac, char **av)
 {
-	int				i;
-	t_data_table	*data;
+	t_data_table	data;
 
-//	memset(&data, 0, sizeof(t_data_table));
+	memset(&data, 0, sizeof(t_data_table));
 	if (check_parsing(ac, av) == FAILURE)
 		return (FAILURE);
-	data = ft_calloc(1, sizeof(t_data_table));
-	if (data == NULL)
+	if (ft_init_prog_data(ac, av, &data) == FAILURE)
 		return (FAILURE);
-	if (ft_init_prog_data(ac, av, data) == FAILURE)
-		return (FAILURE);
-	i = 0;
-	i++;
-	/*while (i < data.nb_philo)
-	{
-		//printf("Philo ID before therad: %i\n", data.agora[i].namber);
-		pthread_create(&data.agora[i].thread, NULL, &ft_hello, &data.agora[i]);
-		// TODO : proteger pthread_create
-		++i;
-	}
-	i = 0;
-	while (i < data.nb_philo)
-	{
-		//printf("philo namber %i my thread is %lu\n", data.agora[i].namber, data.agora[i].thread);
-		pthread_join(data.agora[i].thread, NULL);
-		++i;
-	} */
-	free(data->agora);
-	
+	if (ft_init_philo(&data) == FAILURE)
 	return (SUCCESS);
 }
 
