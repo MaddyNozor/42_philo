@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:29:11 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/01 17:48:38 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/03 18:50:49 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ typedef struct s_philo
 	t_thread		id_thread;
 	long			gap_last_meal;
 	long			start_time_philo; // a voir
+	long			time_to_eat;
+	long			time_to_sleep;
 	int				namber; // name + number t'as capté ?
 	int				nb_meals;
 	bool			full;
@@ -79,6 +81,8 @@ int	check_parsing(int ac, char **av);
 int	ft_init_prog_data(int ac, char **av, t_data_table *data);
 int	ft_init_philo(t_data_table *data);
 int	ft_isdigit(int c);
+void	*good_night(void *arg);
+int	bon_appetit(void *arg);
 
 
 #endif

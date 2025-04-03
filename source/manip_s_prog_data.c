@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:16:57 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/02 18:50:15 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/03 18:51:47 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ int	ft_init_prog_data(int ac, char **av, t_data_table *data)
 	data->start_time = (long)get_time(); //reel ?
 	if (ac == 6)
 		data->nb_time_must_eat = ft_atoi(av[5]);
-	data->agora = malloc(sizeof(t_philo) * data->nb_philo);
-	if (data->agora == NULL)
-		return (ft_error("Malloc failure !"));
+	// data->agora = malloc(sizeof(t_philo) * data->nb_philo);
+	// if (data->agora == NULL)
+	// 	return (ft_error("Malloc failure !"));
 	return (SUCCESS);
 }
 
@@ -95,13 +95,38 @@ int	ft_init_prog_data(int ac, char **av, t_data_table *data)
 
 static void	*ft_routine(void *arg)
 {
-	t_philo	*philo;
-
-	philo = (t_philo *)arg;
-	printf("Hello my namber is %i and my thread id is %lu \n", philo->namber, philo->id_thread);
+	while (1)
+	{
+		good_night(arg);
+		if (bon_appetit(arg) == FAILURE)
+			break;
+	}
 	return (NULL);
 }
 
+void	ft_init_base_values_except_mutex(t_data_table *data, int i)
+{
+	
+	data->agora[i].data = data;
+	data->agora[i].gap_last_meal = 0;
+	data->agora[i].full = false;
+	data->agora[i].nb_meals = 0;
+	data->agora[i].namber = i;
+	data->agora[i].start_time_philo = get_time();
+}
+
+/*
+	while (i < data->nb_of_philo)
+	{
+		init_philo(&data->philos[i], data, i, start_time);
+		pthread_mutex_init(&data->philos[i].r_fork, NULL);
+		if (i != 0)
+			data->philos[i].l_fork = &data->philos[i - 1].r_fork;
+		i++;
+	}
+	data->philos[0].l_fork = &data->philos[data->nb_of_philo - 1].r_fork;
+*/
+	
 int	ft_init_philo(t_data_table *data)
 {
 	int i;
@@ -109,10 +134,16 @@ int	ft_init_philo(t_data_table *data)
 	i = 1;
 	while (i <= data->nb_philo)
 	{
-		data->agora[i].gap_last_meal = 0;
-		data->agora[i].full = false;
-		data->agora[i].nb_meals = 0;
-		data->agora[i].namber = i;
+		ft_init_base_values_except_mutex(data, i);
+		pthread_mutex_init(&data->agora[i].right_stick, NULL);
+		if (i > 1)
+			data->agora[i].left_stick = &data->agora[i - 1].right_stick;
+		i++;
+	}
+	data->agora[0].left_stick = &data->agora[i].right_stick;
+	i = 1;
+	while (i <= data->nb_philo)
+	{
 		pthread_create(&data->agora[i].id_thread, NULL, ft_routine,
 			&data->agora[i]);
 		i++;
