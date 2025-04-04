@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:16:57 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/03 18:51:47 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/04 17:31:33 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,11 @@ static void	*ft_routine(void *arg)
 {
 	while (1)
 	{
-		good_night(arg);
+		if (deep_thought(arg) == FAILURE)
+			break;
 		if (bon_appetit(arg) == FAILURE)
+			break;
+		if (good_night(arg) == FAILURE)
 			break;
 	}
 	return (NULL);
@@ -136,11 +139,14 @@ int	ft_init_philo(t_data_table *data)
 	{
 		ft_init_base_values_except_mutex(data, i);
 		pthread_mutex_init(&data->agora[i].right_stick, NULL);
+		// printf("mutex %i = %p \n", i, &data->agora[i].right_stick);
 		if (i > 1)
 			data->agora[i].left_stick = &data->agora[i - 1].right_stick;
 		i++;
 	}
-	data->agora[0].left_stick = &data->agora[i].right_stick;
+	data->agora[1].left_stick = &data->agora[i - 1].right_stick;
+	// printf("%p \n", data->agora[1].left_stick);
+	// printf("%p \n", &data->agora[4].right_stick);
 	i = 1;
 	while (i <= data->nb_philo)
 	{

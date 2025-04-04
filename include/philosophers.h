@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:29:11 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/03 18:50:49 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/04 15:54:04 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ typedef struct s_data_table
 int				check_parsing(int ac, char **av);
 long			ft_atol(const char *str);
 int				ft_atoi(const char *str);
-void			*ft_hello(void *arg);
 int				ft_init_prog_data(int ac, char **av, t_data_table *data);
 long			get_time(void);
 bool			ft_is_whitespace(char c);
@@ -81,9 +80,9 @@ int	check_parsing(int ac, char **av);
 int	ft_init_prog_data(int ac, char **av, t_data_table *data);
 int	ft_init_philo(t_data_table *data);
 int	ft_isdigit(int c);
-void	*good_night(void *arg);
+int	good_night(void *arg);
 int	bon_appetit(void *arg);
-
+int	deep_thought(void *arg);
 
 #endif
 
