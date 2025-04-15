@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:29:11 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/15 12:14:13 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/15 16:05:19 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_philo
 	t_data_table	*data;
 	t_mutex			right_fork;
 	t_mutex			*left_fork;
+	t_mutex			last_meal_mtx;
 	t_thread		id_thread;
 	long			last_meal_time;
 	long			start_time_philo; // a voir
@@ -83,7 +84,7 @@ int	ft_isdigit(int c);
 int	good_night(void *arg);
 int	bon_appetit(void *arg);
 int	deep_thought(void *arg);
-void	*grim_reaper(t_data_table	*data);
+int grim_reaper(t_data_table *data);
 
 #endif
 

@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:09:34 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/15 12:11:31 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/15 16:51:46 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ int	main(int ac, char **av)
 		return (ft_error("Malloc failure !"));
 	if (ft_init_philo(&data) == FAILURE)
 		return (FAILURE);
-	while (!data.the_end)
-		grim_reaper(&data);
+	while(1)
+		if (grim_reaper(&data) == FAILURE)
+			break;
 	ft_clean_exit(&data);
 	free(data.agora);
 	return (SUCCESS);

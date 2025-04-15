@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:16:57 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/15 12:13:16 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/15 16:33:07 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	*ft_routine(void *arg)
 void	ft_init_base_values_except_mutex(t_data_table *data, int i)
 {
 	data->agora[i].data = data;
-	data->agora[i].last_meal_time = 0;
+	data->agora[i].last_meal_time = get_time();
 	data->agora[i].full = false;
 	data->agora[i].nb_meals = 0;
 	data->agora[i].number = i;
@@ -71,6 +71,7 @@ int	ft_init_philo(t_data_table *data)
 	{
 		ft_init_base_values_except_mutex(data, i);
 		pthread_mutex_init(&data->agora[i].right_fork, NULL);
+		pthread_mutex_init(&data->agora[i].last_meal_mtx, NULL);
 		// printf("mutex %i = %p \n", i, &data->agora[i].right_fork);
 		if (i > 1)
 			data->agora[i].left_fork = &data->agora[i - 1].right_fork;

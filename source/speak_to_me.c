@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:21:18 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/15 12:13:16 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/15 16:51:20 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ int	bon_appetit(void *arg)
 	meal_length = philo->data->time_to_eat * 1000;
 	printf("%ld %i is eating\n",get_time() - philo->start_time_philo,
 		philo->number);
+	philo->last_meal_time = get_time();
 	usleep(meal_length);
 	bring_back_our_sticks(philo);
 	philo->nb_meals++;
-	//mettre a jour le last_meal_time
 	if (philo->nb_meals > 0 && philo->nb_meals == philo->data->nb_time_must_eat)
 	{
 		philo->full = true;
@@ -100,24 +100,25 @@ int	deep_thought(void *arg)
 	return (SUCCESS);
 }
 
-void	*grim_reaper(t_data_table	*data)
+int	grim_reaper(t_data_table *data)
 {
 	int	i;
 
-	//while (!data->the_end)
-	//{
+	while (!data->the_end)
+	{
 		i = 1;
 		while (i <= data->nb_philo && !data->the_end)
 		{
 			if (get_time() - data->agora[i].last_meal_time > data->time_to_die)
 			{
+				printf("%ld %ld %i \n", get_time() - data->agora[i].last_meal_time, data->agora[i].last_meal_time, data->time_to_die);
 				data->the_end = true;
-				printf("%ld %i died\n", get_time() - data->start_time, data->agora[i].number);
-				break ;
+				printf("%ld %i died ---------------------------\n", get_time() - data->start_time, data->agora[i].number);
+				return (FAILURE);
 			}
 			i++;
 		}
-		usleep(data->time_to_die); // check toutes les 1 ms
-	//}
-	//return (NULL);
+		usleep(data->time_to_die);
+	}
+	return (SUCCESS);
 }
