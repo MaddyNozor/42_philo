@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   speak_to_me.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:21:18 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/04 17:35:36 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:13:16 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 void bring_back_our_sticks(t_philo *philo)
 {
-	if (philo->namber % 2 == 0)
+	if (philo->number % 2 == 0)
 	{
-		pthread_mutex_unlock(philo->left_stick);
+		pthread_mutex_unlock(philo->left_fork);
 		// printf("%ld %i put back the R%p fork\n",get_time() - philo->start_time_philo,
-		// 		philo->namber, philo->left_stick);	
-		pthread_mutex_unlock(&philo->right_stick);
+		// 		philo->number, philo->left_fork);	
+		pthread_mutex_unlock(&philo->right_fork);
 		// printf("%ld %i put back the L%p fork\n",get_time() - philo->start_time_philo,
-		// 		philo->namber, &philo->right_stick);
+		// 		philo->number, &philo->right_fork);
 	}
-	else if (philo->namber % 2 != 0)
+	else if (philo->number % 2 != 0)
 	{
-		pthread_mutex_unlock(&philo->right_stick);
+		pthread_mutex_unlock(&philo->right_fork);
 		// printf("%ld %i put back the L%p fork\n",get_time() - philo->start_time_philo,
-		// 		philo->namber, &philo->right_stick);
-		pthread_mutex_unlock(philo->left_stick);
+		// 		philo->number, &philo->right_fork);
+		pthread_mutex_unlock(philo->left_fork);
 		// printf("%ld %i put back the R%p fork\n",get_time() - philo->start_time_philo,
-		// 		philo->namber, philo->left_stick);	
+		// 		philo->number, philo->left_fork);	
 	}
 }
 
@@ -43,7 +43,7 @@ int	good_night(void *arg)
 	sleep_length = philo->data->time_to_sleep * 1000;
 	
 	printf("%ld %i is sleeping\n",get_time() - philo->start_time_philo,
-		philo->namber);
+		philo->number);
 	usleep(sleep_length);
 	return (SUCCESS);
 }
@@ -56,16 +56,16 @@ int	bon_appetit(void *arg)
 	philo = (t_philo *)arg;
 	meal_length = philo->data->time_to_eat * 1000;
 	printf("%ld %i is eating\n",get_time() - philo->start_time_philo,
-		philo->namber);
+		philo->number);
 	usleep(meal_length);
 	bring_back_our_sticks(philo);
 	philo->nb_meals++;
-	//mettre a jour le gap_last_meal
+	//mettre a jour le last_meal_time
 	if (philo->nb_meals > 0 && philo->nb_meals == philo->data->nb_time_must_eat)
 	{
 		philo->full = true;
 		printf("%ld %i is full !\n",get_time() - philo->start_time_philo,
-		philo->namber);
+		philo->number);
 		return (FAILURE);
 	}
 	
@@ -78,24 +78,46 @@ int	deep_thought(void *arg)
 	
 	philo = (t_philo *)arg;
 	printf("%ld %i is thinking\n",get_time() - philo->start_time_philo,
-		philo->namber);
-	if (philo->namber % 2 != 0)
+		philo->number);
+	if (philo->number % 2 != 0)
 	{
-		pthread_mutex_lock(philo->left_stick);
+		pthread_mutex_lock(philo->left_fork);
 		printf("%ld %i has taken the L%p fork\n",get_time() - philo->start_time_philo,
-			philo->namber, &philo->right_stick);
-		pthread_mutex_lock(&philo->right_stick);
+			philo->number, &philo->right_fork);
+		pthread_mutex_lock(&philo->right_fork);
 		printf("%ld %i has taken the R%p fork\n",get_time() - philo->start_time_philo,
-			philo->namber, philo->left_stick);	
+			philo->number, philo->left_fork);	
 	}
-	if (philo->namber % 2 == 0)
+	if (philo->number % 2 == 0)
 	{
-		pthread_mutex_lock(&philo->right_stick);
+		pthread_mutex_lock(&philo->right_fork);
 		printf("%ld %i has taken the RR%p fork\n",get_time() - philo->start_time_philo,
-			philo->namber, &philo->right_stick);
-		pthread_mutex_lock(philo->left_stick);
+			philo->number, &philo->right_fork);
+		pthread_mutex_lock(philo->left_fork);
 		printf("%ld %i has taken the LL%p fork\n",get_time() - philo->start_time_philo,
-			philo->namber, philo->left_stick);	
+			philo->number, philo->left_fork);	
 	}
 	return (SUCCESS);
+}
+
+void	*grim_reaper(t_data_table	*data)
+{
+	int	i;
+
+	//while (!data->the_end)
+	//{
+		i = 1;
+		while (i <= data->nb_philo && !data->the_end)
+		{
+			if (get_time() - data->agora[i].last_meal_time > data->time_to_die)
+			{
+				data->the_end = true;
+				printf("%ld %i died\n", get_time() - data->start_time, data->agora[i].number);
+				break ;
+			}
+			i++;
+		}
+		usleep(data->time_to_die); // check toutes les 1 ms
+	//}
+	//return (NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:29:11 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/04 15:54:04 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:14:13 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ typedef struct s_data_table	t_data_table;
 typedef struct s_philo
 {
 	t_data_table	*data;
-	t_mutex			right_stick;
-	t_mutex			*left_stick;
+	t_mutex			right_fork;
+	t_mutex			*left_fork;
 	t_thread		id_thread;
-	long			gap_last_meal;
+	long			last_meal_time;
 	long			start_time_philo; // a voir
 	long			time_to_eat;
 	long			time_to_sleep;
-	int				namber; // name + number t'as capté ?
+	int				number; // name + number t'as capté ?
 	int				nb_meals;
 	bool			full;
 }				t_philo;
@@ -83,6 +83,7 @@ int	ft_isdigit(int c);
 int	good_night(void *arg);
 int	bon_appetit(void *arg);
 int	deep_thought(void *arg);
+void	*grim_reaper(t_data_table	*data);
 
 #endif
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:09:34 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/03 15:52:04 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:11:31 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_clean_exit(t_data_table *data)
 	i = 1;
 	while (i <= data->nb_philo)
 	{
-		pthread_mutex_destroy(&data->agora[i].right_stick);
+		pthread_mutex_destroy(&data->agora[i].right_fork);
 		i++;
 	}
 	return;
@@ -45,7 +45,8 @@ int	main(int ac, char **av)
 		return (ft_error("Malloc failure !"));
 	if (ft_init_philo(&data) == FAILURE)
 		return (FAILURE);
-	sleep(1);
+	while (!data.the_end)
+		grim_reaper(&data);
 	ft_clean_exit(&data);
 	free(data.agora);
 	return (SUCCESS);
