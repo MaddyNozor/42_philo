@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:09:34 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/15 21:02:26 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/22 11:19:50 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,19 @@ int	main(int ac, char **av)
 	if (ft_init_philo(&data) == FAILURE)
 		return (FAILURE);
 	while(1)
-		if (death_has_come(&data) || no_more_pasta_needed(&data))
+	{
+		if (no_more_pasta_needed(&data))
+		{	
+			printf("pasta end \n");
+			break;
+		}
+		if (death_has_come(&data))
+		{	
+			printf("hi Death ! \n");
+			break;
+		}
+		usleep(1000);
+	}
 	ft_clean_exit(&data);
 	free(data.agora);
 	return (SUCCESS);

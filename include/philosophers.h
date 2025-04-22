@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:29:11 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/22 10:05:09 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/22 11:54:13 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_philo
 	t_mutex			right_fork;
 	t_mutex			*left_fork;
 	t_mutex			last_meal_mtx;
+	t_mutex			*satiation_mtx;
 	t_thread		id_thread;
 	long			last_meal_time;
 	long			start_time_philo; // a voir
@@ -56,6 +57,7 @@ typedef struct s_philo
 typedef struct s_data_table
 {
 	t_philo			*agora;
+	t_mutex			satiation_mtx;
 	long			start_time;
 	int				nb_philo;
 	int				time_to_die;
@@ -85,7 +87,7 @@ int	good_night(void *arg);
 int	bon_appetit(void *arg);
 int	deep_thought(void *arg);
 int death_has_come(t_data_table *data);
-int no_more_pasta_needed(t_data_table *data);
+bool no_more_pasta_needed(t_data_table *data);
 
 #endif
 

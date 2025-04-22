@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:16:57 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/15 20:44:28 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/22 11:57:09 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	ft_init_prog_data(int ac, char **av, t_data_table *data)
 	data->start_time = (long)get_time(); //reel ?
 	if (ac == 6)
 		data->nb_time_must_eat = ft_atoi(av[5]);
+	data->satiation_mtx = pthread_mutex_init(data->agora[i].satiation_mtx, NULL);
 	return (SUCCESS);
 }
 
@@ -33,7 +34,10 @@ static void	*ft_routine(void *arg)
 		if (deep_thought(arg) == FAILURE)
 			break;
 		if (bon_appetit(arg) == FAILURE)
+		{
+			printf("one philo full \n");	
 			break;
+		}
 		if (good_night(arg) == FAILURE)
 			break;
 	}
@@ -72,6 +76,7 @@ int	ft_init_philo(t_data_table *data)
 		ft_init_base_values_except_mutex(data, i);
 		pthread_mutex_init(&data->agora[i].right_fork, NULL);
 		pthread_mutex_init(&data->agora[i].last_meal_mtx, NULL);
+		pthread_mutex_init(&data->satiation_mtx, NULL);
 		// printf("mutex %i = %p \n", i, &data->agora[i].right_fork);
 		if (i > 1)
 			data->agora[i].left_fork = &data->agora[i - 1].right_fork;

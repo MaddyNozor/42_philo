@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:21:18 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/15 20:44:06 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/22 11:51:07 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,12 @@ int	bon_appetit(void *arg)
 	philo->nb_meals++;
 	if (philo->nb_meals > 0 && philo->nb_meals == philo->data->nb_time_must_eat)
 	{
+		pthread_mutex_lock(philo->satiation_mtx);
 		philo->full = true;
-		printf("%ld %i is full !\n",get_time() - philo->start_time_philo,
-		philo->number);
+		pthread_mutex_unlock(philo->satiation_mtx);
+		//printf("%ld %i is full !\n",get_time() - philo->start_time_philo,
+		//	philo->number);
+		//usleep(1);
 		return (FAILURE);
 	}
 	
@@ -90,6 +93,7 @@ int	deep_thought(void *arg)
 	}
 	if (philo->number % 2 == 0)
 	{
+		usleep(1);
 		pthread_mutex_lock(&philo->right_fork);
 		printf("%ld %i has taken the RR%p fork\n",get_time() - philo->start_time_philo,
 			philo->number, &philo->right_fork);

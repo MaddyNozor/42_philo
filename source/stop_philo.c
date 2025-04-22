@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:03:50 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/22 10:22:49 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/22 11:47:45 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,25 @@ int	death_has_come(t_data_table *data)
 
 //check si tous les philos ont mangé leur nombre max de repas
 // return true ou false
-int no_more_pasta_needed(t_data_table *data)
+bool no_more_pasta_needed(t_data_table *data)
 {
 	int i;
-	int nb_philo_full;
+	bool	full;
 	
-	i = 0;
-	nb_philo_full = 0;
-	while (i < data->nb_philo)
+	i = 1;
+	full = false;
+	while (i <= data->nb_philo)
 	{
-		if (data->agora[i].full == true)
-			nb_philo_full++;
+		printf("Philo %d full ? %d\n", i, data->agora[i].full);
+		pthread_mutex_lock(data->agora[i].satiation_mtx);
+		full = data->agora[i].full;
+		pthread_mutex_unlock(data->agora[i].satiation_mtx);
+		if (full == false)
+			return false;
 		i++;
 	}
-	if (nb_philo_full == data->nb_philo)
-		return (SUCCESS);
-    return (FAILURE);
+	data->the_end = true;
+	return (true);
 }
 
 /*
