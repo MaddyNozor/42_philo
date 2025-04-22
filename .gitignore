@@ -1,0 +1,9 @@
+
+
+# Object files
+obj/
+*.o
+
+
+
+philo

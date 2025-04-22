@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:16:57 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/22 19:26:36 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/22 21:20:11 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	ft_init_prog_data(int ac, char **av, t_data_table *data)
 	data->time_to_eat = ft_atoi(av[3]);
 	data->time_to_sleep = ft_atoi(av[4]);
 	data->nb_time_must_eat = -1;
-	data->the_end = false;
+	data->sim_is_over = false;
+	pthread_mutex_init(&data->sim_over_mtx, NULL);
 	data->start_time = (long)get_time(); //reel ?
 	if (ac == 6)
 		data->nb_time_must_eat = ft_atoi(av[5]);
@@ -75,6 +76,7 @@ int	ft_init_philo(t_data_table *data)
 		pthread_mutex_init(&data->agora[i].right_fork, NULL);
 		pthread_mutex_init(&data->agora[i].last_meal_mtx, NULL);
 		pthread_mutex_init(&data->agora[i].full_state_mtx, NULL);
+		pthread_mutex_init(&data->agora[i].nb_meals_mtx, NULL);
 		// printf("mutex %i = %p \n", i, &data->agora[i].right_fork);
 		if (i > 1)
 			data->agora[i].left_fork = &data->agora[i - 1].right_fork;

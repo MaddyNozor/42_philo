@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:03:50 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/22 19:28:08 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/22 20:26:26 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ int	death_has_come(t_data_table *data)
 	int	i;
 
 	i = 1;
-	while (i <= data->nb_philo && !data->the_end)
+	while (i <= data->nb_philo && !data->sim_is_over)
 	{
 		if (get_time() - data->agora[i].last_meal_time > data->time_to_die)
 		{
 			//printf("%ld %ld %i \n", get_time() - data->agora[i].last_meal_time, data->agora[i].last_meal_time, data->time_to_die);
-			data->the_end = true;
+			data->sim_is_over = true;
 			printf("%ld %i died \n", get_time() - data->start_time, data->agora[i].number);
 			return (true);
 		}
@@ -50,7 +50,7 @@ bool no_more_pasta_needed(t_data_table *data)
 			return false;
 		i++;
 	}
-	data->the_end = true;
+	data->sim_is_over = true;
 	return (true);
 }
 
@@ -80,6 +80,6 @@ typedef struct s_data_table
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				nb_time_must_eat;
-	bool			the_end; // this is the end, my friend
+	bool			sim_is_over; // this is the end, my friend
 }				t_data_table;
 */
