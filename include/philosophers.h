@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:29:11 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/22 21:18:44 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/22 21:38:55 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,15 @@ int	check_parsing(int ac, char **av);
 int	ft_init_prog_data(int ac, char **av, t_data_table *data);
 int	ft_init_philo(t_data_table *data);
 int	ft_isdigit(int c);
-int	good_night(void *arg);
-int	bon_appetit(void *arg);
-int	deep_thought(void *arg);
+int	good_night(t_philo *philo);
+int	bon_appetit(t_philo *philo);
+int	deep_thought(t_philo *philo);
 int death_has_come(t_data_table *data);
 bool no_more_pasta_needed(t_data_table *data);
+long 	get_last_meal_time(t_philo *philo);
+int		get_nb_meals(t_philo *philo);
+bool	get_full_state(t_philo *philo);
+bool	is_simulation_over(t_philo *philo);
 
 #endif
 

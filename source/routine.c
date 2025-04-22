@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:21:18 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/22 19:28:08 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/22 22:27:59 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,45 +16,39 @@ void bring_back_our_sticks(t_philo *philo)
 {
 	if (philo->number % 2 == 0)
 	{
-		pthread_mutex_unlock(philo->left_fork);
-		// printf("%ld %i put back the R%p fork\n",get_time() - philo->data->start_time,
-		// 		philo->number, philo->left_fork);	
+		pthread_mutex_unlock(philo->left_fork);	
 		pthread_mutex_unlock(&philo->right_fork);
-		// printf("%ld %i put back the L%p fork\n",get_time() - philo->data->start_time,
-		// 		philo->number, &philo->right_fork);
 	}
 	else if (philo->number % 2 != 0)
 	{
 		pthread_mutex_unlock(&philo->right_fork);
-		// printf("%ld %i put back the L%p fork\n",get_time() - philo->data->start_time,
-		// 		philo->number, &philo->right_fork);
-		pthread_mutex_unlock(philo->left_fork);
-		// printf("%ld %i put back the R%p fork\n",get_time() - philo->data->start_time,
-		// 		philo->number, philo->left_fork);	
+		pthread_mutex_unlock(philo->left_fork);	
 	}
 }
 
-int	good_night(void *arg)
+int	good_night(t_philo *philo)
 {
-	t_philo					*philo;
 	long			sleep_length;
 
-	philo = (t_philo *)arg;
+	if(is_simulation_over(philo))
+		return (FAILURE);
 	sleep_length = philo->data->time_to_sleep * 1000;
-	
 	printf("%ld %i is sleeping\n",get_time() - philo->data->start_time,
 		philo->number);
 	usleep(sleep_length);
 	return (SUCCESS);
 }
 
-int	bon_appetit(void *arg)
+int	bon_appetit(t_philo *philo)
 {
-	t_philo			*philo;
 	long			meal_length;
 
-	philo = (t_philo *)arg;
 	meal_length = philo->data->time_to_eat * 1000;
+	if(is_simulation_over(philo))
+	{
+		bring_back_our_sticks(philo);
+		return (FAILURE);
+	}
 	printf("%ld %i is eating\n",get_time() - philo->data->start_time,
 		philo->number);
 	philo->last_meal_time = get_time();
@@ -66,40 +60,50 @@ int	bon_appetit(void *arg)
 		pthread_mutex_lock(&philo->full_state_mtx);
 		philo->full = true;
 		pthread_mutex_unlock(&philo->full_state_mtx);
-		//printf("%ld %i is full !\n",get_time() - philo->data->start_time,
-		//	philo->number);
 		//usleep(1);
 		return (FAILURE);
 	}
-	
 	return (SUCCESS);
 }
 
-int	deep_thought(void *arg)
+int	deep_thought(t_philo *philo)
 {
-	t_philo			*philo;
-	
-	philo = (t_philo *)arg;
+	if(is_simulation_over(philo))
+		return (FAILURE);
 	printf("%ld %i is thinking\n",get_time() - philo->data->start_time,
 		philo->number);
 	if (philo->number % 2 != 0)
 	{
+		if(is_simulation_over(philo))
+			return (FAILURE);
 		pthread_mutex_lock(philo->left_fork);
-		printf("%ld %i has taken the L%p fork\n",get_time() - philo->data->start_time,
-			philo->number, &philo->right_fork);
+		printf("%ld %i has taken a fork\n",get_time() - philo->data->start_time,
+			philo->number);
+		if(is_simulation_over(philo))
+		{
+			bring_back_our_sticks(philo);
+			return (FAILURE);
+		}
 		pthread_mutex_lock(&philo->right_fork);
-		printf("%ld %i has taken the R%p fork\n",get_time() - philo->data->start_time,
-			philo->number, philo->left_fork);	
+		printf("%ld %i has taken a fork\n",get_time() - philo->data->start_time,
+			philo->number);	
 	}
 	if (philo->number % 2 == 0)
 	{
 		usleep(1);
+		if(is_simulation_over(philo))
+			return (FAILURE);
 		pthread_mutex_lock(&philo->right_fork);
-		printf("%ld %i has taken the RR%p fork\n",get_time() - philo->data->start_time,
-			philo->number, &philo->right_fork);
+		printf("%ld %i has taken a fork\n",get_time() - philo->data->start_time,
+			philo->number);
+		if(is_simulation_over(philo))
+		{
+			bring_back_our_sticks(philo);
+			return (FAILURE);
+		}
 		pthread_mutex_lock(philo->left_fork);
-		printf("%ld %i has taken the LL%p fork\n",get_time() - philo->data->start_time,
-			philo->number, philo->left_fork);	
+		printf("%ld %i has taken a fork\n",get_time() - philo->data->start_time,
+			philo->number);	
 	}
 	return (SUCCESS);
 }

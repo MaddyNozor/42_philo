@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:09:34 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/22 17:29:36 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/22 22:34:51 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,10 @@ int	main(int ac, char **av)
 	while(1)
 	{
 		if (death_has_come(&data))
-		{	
-			printf("hi Death ! \n");
 			break;
-		}
 		if (no_more_pasta_needed(&data))
-		{	
-			printf("pasta end \n");
 			break;
-		}
-		usleep(1000);
+		usleep(500);
 	}
 	ft_clean_exit(&data);
 	free(data.agora);

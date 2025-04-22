@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:16:57 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/22 21:20:11 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/22 21:46:48 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,20 @@ int	ft_init_prog_data(int ac, char **av, t_data_table *data)
 
 static void	*ft_routine(void *arg)
 {
-	while (1)
+	t_philo	*philo;
+	bool 	sim_is_over;
+	
+	philo = (t_philo *) arg;
+	sim_is_over = is_simulation_over(philo);
+	while (!sim_is_over)
 	{
-		if (deep_thought(arg) == FAILURE)
+		if (deep_thought(philo) == FAILURE)
 			break;
-		if (bon_appetit(arg) == FAILURE)
-		{
-			//printf("full \n");	
+		if (bon_appetit(philo) == FAILURE)	
 			break;
-		}
-		if (good_night(arg) == FAILURE)
+		if (good_night(philo) == FAILURE)
 			break;
+		sim_is_over = is_simulation_over(philo);
 	}
 	return (NULL);
 }

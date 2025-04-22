@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:16:57 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/22 21:21:12 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/22 21:49:26 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
  {
      bool	result;
  
+     //result = false;
      pthread_mutex_lock(&philo->data->sim_over_mtx);
      result = philo->data->sim_is_over;
      pthread_mutex_unlock(&philo->data->sim_over_mtx);

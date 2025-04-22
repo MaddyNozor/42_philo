@@ -6,7 +6,7 @@
 #    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/16 15:29:24 by mairivie          #+#    #+#              #
-#    Updated: 2025/04/22 10:07:37 by codespace        ###   ########.fr        #
+#    Updated: 2025/04/22 21:50:02 by codespace        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC_LIST = main.c \
 		routine.c \
 		init.c \
 		utils.c \
+		getters.c \
 		stop_philo.c
 		
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
