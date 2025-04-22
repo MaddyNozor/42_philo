@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:29:11 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/15 16:05:19 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/22 10:05:09 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ int	ft_isdigit(int c);
 int	good_night(void *arg);
 int	bon_appetit(void *arg);
 int	deep_thought(void *arg);
-int grim_reaper(t_data_table *data);
+int death_has_come(t_data_table *data);
+int no_more_pasta_needed(t_data_table *data);
 
 #endif
 

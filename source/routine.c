@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   speak_to_me.c                                      :+:      :+:    :+:   */
+/*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:21:18 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/15 16:51:20 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/15 20:44:06 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,25 +100,3 @@ int	deep_thought(void *arg)
 	return (SUCCESS);
 }
 
-int	grim_reaper(t_data_table *data)
-{
-	int	i;
-
-	while (!data->the_end)
-	{
-		i = 1;
-		while (i <= data->nb_philo && !data->the_end)
-		{
-			if (get_time() - data->agora[i].last_meal_time > data->time_to_die)
-			{
-				printf("%ld %ld %i \n", get_time() - data->agora[i].last_meal_time, data->agora[i].last_meal_time, data->time_to_die);
-				data->the_end = true;
-				printf("%ld %i died ---------------------------\n", get_time() - data->start_time, data->agora[i].number);
-				return (FAILURE);
-			}
-			i++;
-		}
-		usleep(data->time_to_die);
-	}
-	return (SUCCESS);
-}

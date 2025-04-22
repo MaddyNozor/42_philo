@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+         #
+#    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/16 15:29:24 by mairivie          #+#    #+#              #
-#    Updated: 2025/04/01 17:52:24 by mairivie         ###   ########.fr        #
+#    Updated: 2025/04/22 10:07:37 by codespace        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,10 @@ INCLUDE = include/
 SRC_DIR = source/
 SRC_LIST = main.c \
 		parsing.c \
-		speak_to_me.c \
-		manip_s_prog_data.c \
-		utils.c
+		routine.c \
+		init.c \
+		utils.c \
+		stop_philo.c
 		
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
 
