@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stop_philo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:03:50 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/22 20:26:26 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/23 14:57:14 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	death_has_come(t_data_table *data)
 	{
 		if (get_time() - data->agora[i].last_meal_time > data->time_to_die)
 		{
-			//printf("%ld %ld %i \n", get_time() - data->agora[i].last_meal_time, data->agora[i].last_meal_time, data->time_to_die);
 			data->sim_is_over = true;
-			printf("%ld %i died \n", get_time() - data->start_time, data->agora[i].number);
+			printf("%ld %i died \n", get_time() - data->start_time,
+				data->agora[i].number);
 			return (true);
 		}
 		i++;
@@ -33,53 +33,22 @@ int	death_has_come(t_data_table *data)
 
 //check si tous les philos ont mangé leur nombre max de repas
 // return true ou false
-bool no_more_pasta_needed(t_data_table *data)
+bool	no_more_pasta_needed(t_data_table *data)
 {
-	int i;
+	int		i;
 	bool	full;
-	
+
 	i = 1;
 	full = false;
 	while (i <= data->nb_philo)
 	{
-		//printf("Philo %d full ? %d\n", i, data->agora[i].full);
 		pthread_mutex_lock(&data->agora[i].full_state_mtx);
 		full = data->agora[i].full;
 		pthread_mutex_unlock(&data->agora[i].full_state_mtx);
 		if (full == false)
-			return false;
+			return (false);
 		i++;
 	}
 	data->sim_is_over = true;
 	return (true);
 }
-
-/*
-typedef struct s_philo
-{
-	t_data_table	*data;
-	t_mutex			right_fork;
-	t_mutex			*left_fork;
-	t_mutex			last_meal_mtx;
-	t_thread		id_thread;
-	long			last_meal_time;
-	long			data->start_time; // a voir
-	long			time_to_eat;
-	long			time_to_sleep;
-	int				number; // name + number t'as capté ?
-	int				nb_meals;
-	bool			full;
-}				t_philo;
-
-typedef struct s_data_table
-{
-	t_philo			*agora;
-	long			start_time;
-	int				nb_philo;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				nb_time_must_eat;
-	bool			sim_is_over; // this is the end, my friend
-}				t_data_table;
-*/

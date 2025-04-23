@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
+#    By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/16 15:29:24 by mairivie          #+#    #+#              #
-#    Updated: 2025/04/22 21:50:02 by codespace        ###   ########.fr        #
+#    Updated: 2025/04/23 14:59:17 by mairivie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC_DIR = source/
 SRC_LIST = main.c \
 		parsing.c \
 		routine.c \
+		routine_utils.c \
 		init.c \
 		utils.c \
 		getters.c \

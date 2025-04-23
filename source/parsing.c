@@ -6,13 +6,13 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:36:02 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/01 14:53:08 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/23 14:36:33 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-long	ft_atol(const char *str) //TODO mettre atol dans ma libft
+long	ft_atol(const char *str)
 {
 	int		i;
 	int		sign;
@@ -45,6 +45,7 @@ bool	is_negative(int nbr)
 		return (true);
 	return (false);
 }
+//TODO mettre atol dans ma libft
 
 bool	is_bigger_than_intmax(long long_to_check)
 {

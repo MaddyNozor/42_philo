@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:09:34 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/22 22:34:51 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/23 14:52:43 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	ft_clean_exit(t_data_table *data)
 		pthread_mutex_destroy(&data->agora[i].right_fork);
 		i++;
 	}
-	return;
-}	
+	return ;
+}
 
 int	main(int ac, char **av)
 {
@@ -45,12 +45,12 @@ int	main(int ac, char **av)
 		return (ft_error("Malloc failure !"));
 	if (ft_init_philo(&data) == FAILURE)
 		return (FAILURE);
-	while(1)
+	while (1)
 	{
 		if (death_has_come(&data))
-			break;
+			break ;
 		if (no_more_pasta_needed(&data))
-			break;
+			break ;
 		usleep(500);
 	}
 	ft_clean_exit(&data);
