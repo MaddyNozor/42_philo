@@ -6,30 +6,11 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:09:34 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/23 14:52:43 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/23 16:08:06 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
-
-void	ft_clean_exit(t_data_table *data)
-{
-	int	i;
-
-	i = 1;
-	while (i <= data->nb_philo)
-	{
-		pthread_join(data->agora[i].id_thread, NULL);
-		i++;
-	}
-	i = 1;
-	while (i <= data->nb_philo)
-	{
-		pthread_mutex_destroy(&data->agora[i].right_fork);
-		i++;
-	}
-	return ;
-}
 
 int	main(int ac, char **av)
 {

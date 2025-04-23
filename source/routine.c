@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:21:18 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/23 15:35:40 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/23 16:16:56 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	deep_thought_odd(t_philo *philo)
 
 int	deep_thought_even(t_philo *philo)
 {
-	usleep(1);
+	usleep(5);
 	if (is_simulation_over(philo))
 	{
 		bring_back_our_sticks(philo);

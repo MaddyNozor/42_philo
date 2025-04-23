@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:16:57 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/23 14:40:02 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/23 16:08:54 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ long	get_last_meal_time(t_philo *philo)
 	return (last_meal);
 }
 
-int	get_nb_meals(t_philo *philo)
+int     get_nb_meals(t_philo *philo)
 {
 	int	meal_counter;
 

@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:03:50 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/23 14:57:14 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/23 16:10:16 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,23 @@ bool	no_more_pasta_needed(t_data_table *data)
 	}
 	data->sim_is_over = true;
 	return (true);
+}
+
+void	ft_clean_exit(t_data_table *data)
+{
+	int	i;
+
+	i = 1;
+	while (i <= data->nb_philo)
+	{
+		pthread_join(data->agora[i].id_thread, NULL);
+		i++;
+	}
+	i = 1;
+	while (i <= data->nb_philo)
+	{
+		pthread_mutex_destroy(&data->agora[i].right_fork);
+		i++;
+	}
+	return ;
 }
