@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:21:18 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/24 11:55:25 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/24 17:17:44 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@ void	bring_back_our_forks(t_philo *philo)
 		pthread_mutex_unlock(&philo->right_fork);
 		pthread_mutex_unlock(philo->left_fork);
 	}
+}
+
+bool	ft_usleep(long time, t_philo *philo)
+{
+	long	start;
+
+	start = get_time();
+	while (get_time() - start < time)
+	{
+		if (is_simulation_over(philo))
+			return (false);
+		usleep(100);
+	}
+	return (true);
 }
 
 // int	deep_thought(t_philo *philo)

@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:16:57 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/24 16:11:48 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/24 19:25:40 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	ft_init_prog_data(int ac, char **av, t_data_table *data)
 	data->time_to_sleep = ft_atoi(av[4]);
 	data->nb_time_must_eat = -1;
 	data->sim_is_over = false;
+	data->start_time = 0;
 	pthread_mutex_init(&data->sim_over_mtx, NULL);
 	pthread_mutex_init(&data->last_meal_mtx, NULL);
 	pthread_mutex_init(&data->full_state_mtx, NULL);
@@ -52,8 +53,11 @@ static void	*ft_routine(void *arg)
 void	ft_init_base_values_except_mutex(t_data_table *data, int i)
 {
 	data->agora[i].data = data;
-	data->agora[i].last_meal_time = get_time();
+	data->agora[i].last_meal_time = data->start_time;
+	data->agora[i].time_to_eat = data->time_to_eat;
+	data->agora[i].time_to_sleep = data->time_to_sleep;
 	data->agora[i].full = false;
+	data->agora[i].first_turn = true;
 	data->agora[i].nb_meals = 0;
 	data->agora[i].number = i;
 }

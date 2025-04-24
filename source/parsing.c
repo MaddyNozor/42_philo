@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:36:02 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/24 13:53:17 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/24 19:14:18 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	looks_like_an_int(char *str)
 	nb_len = 0;
 	while (ft_is_whitespace(str[i]) == true)
 		i++;
+	if (str[i] == '\'' || str[i] == '\"')
+		i++;
 	if ((str[i] == '+' || str[i] == '-') && (str[i + 1]))
 		i++;
 	while (str[i])
@@ -84,17 +86,13 @@ int	check_parsing(int ac, char **av)
 
 	if (ac < 5 || ac > 6)
 		return (ft_error("Need between 4 and 5 numeric arguments."));
-	i = 0;
+	i = 1;
 	while (av[i])
 	{
-		//TODO: deplacer le check arg vide et message d'erru\eur apres le atol
-		// if (av[i] == NULL || av[i] == '\0')
-		// 	return (ft_error("Empty String is not a valid argument."));
-		// if (looks_like_an_int(av[i]) == FAILURE)
-		// 	return (ft_error("Looks like some arg are not valid int."));
-		// else
 		{
 			long_to_check = ft_atol(av[i]);
+			if (long_to_check == 0)
+				return (ft_error("Empty String is not a valid argument."));
 			if (is_negative(long_to_check) == true)
 				return (ft_error("Arguments must be positive."));
 			if (is_bigger_than_intmax(long_to_check) == true)
@@ -104,3 +102,10 @@ int	check_parsing(int ac, char **av)
 	}
 	return (SUCCESS);
 }
+
+		//TODO: deplacer le check arg vide et message d'erru\eur apres le atol
+		// if (av[i] == NULL || av[i] == '\0')
+		// 	return (ft_error("Empty String is not a valid argument."));
+		// if (looks_like_an_int(av[i]) == FAILURE)
+		// 	return (ft_error("Looks like some arg are not valid int."));
+		// else

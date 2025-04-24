@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:29:11 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/24 15:41:29 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/24 19:24:59 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_philo
 	long			time_to_sleep;
 	int				number;
 	int				nb_meals;
+	bool			first_turn;
 	bool			full;
 }				t_philo;
 
@@ -85,6 +86,7 @@ int		check_parsing(int ac, char **av);
 int		ft_init_prog_data(int ac, char **av, t_data_table *data);
 int		ft_init_philo(t_data_table *data);
 int		ft_isdigit(int c);
+bool	ft_usleep(long time, t_philo *philo);
 int		good_night(t_philo *philo);
 int		bon_appetit(t_philo *philo);
 int		deep_thought(t_philo *philo);

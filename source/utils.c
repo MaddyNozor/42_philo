@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:03:50 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/23 14:38:22 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/24 19:12:11 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ bool	ft_is_whitespace(char c)
 	if (c >= 9 && c <= 13)
 		return (true);
 	else if (c == ' ')
+		return (true);
+	else if (c == '\'' || c == '\"')
 		return (true);
 	return (false);
 }
