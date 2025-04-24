@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:09:34 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/23 16:08:06 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/24 15:38:34 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int ac, char **av)
 		return (FAILURE);
 	if (ft_init_prog_data(ac, av, &data) == FAILURE)
 		return (FAILURE);
+	//TODO : initialiser start time juste juste avant ft init philo
 	data.agora = malloc(sizeof(t_philo) * (data.nb_philo + 1));
 	if (data.agora == NULL)
 		return (ft_error("Malloc failure !"));
@@ -56,7 +57,7 @@ int	main(int ac, char **av)
 // 	time_to_die = av[2];
 // 	time_to_eat = av[3];
 // 	time_to_sleep = av[4];
-// 	if (ac == 6) //TODO y a ce cas a gerer. tsss clean code a faire
+// 	if (ac == 6) 
 // 		nb_time_must_eat = av[5];
 
 // pthread_mutex_lock(&print_mutex); // Début de la section critique

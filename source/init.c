@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:16:57 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/23 14:54:54 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:11:48 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int	ft_init_prog_data(int ac, char **av, t_data_table *data)
 	data->nb_time_must_eat = -1;
 	data->sim_is_over = false;
 	pthread_mutex_init(&data->sim_over_mtx, NULL);
-	data->start_time = (long)get_time();
+	pthread_mutex_init(&data->last_meal_mtx, NULL);
+	pthread_mutex_init(&data->full_state_mtx, NULL);
+	pthread_mutex_init(&data->nb_meals_mtx, NULL);
 	if (ac == 6)
 		data->nb_time_must_eat = ft_atoi(av[5]);
 	return (SUCCESS);
@@ -61,13 +63,14 @@ int	ft_init_philo(t_data_table *data)
 	int	i;
 
 	i = 1;
+	data->start_time = (long)get_time();
 	while (i <= data->nb_philo)
 	{
 		ft_init_base_values_except_mutex(data, i);
 		pthread_mutex_init(&data->agora[i].right_fork, NULL);
-		pthread_mutex_init(&data->agora[i].last_meal_mtx, NULL);
-		pthread_mutex_init(&data->agora[i].full_state_mtx, NULL);
-		pthread_mutex_init(&data->agora[i].nb_meals_mtx, NULL);
+		data->agora[i].last_meal_mtx = &data->last_meal_mtx;
+		data->agora[i].full_state_mtx = &data->full_state_mtx;
+		data->agora[i].nb_meals_mtx = &data->nb_meals_mtx;
 		if (i > 1)
 			data->agora[i].left_fork = &data->agora[i - 1].right_fork;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:16:57 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/23 16:08:54 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/24 15:57:52 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ long	get_last_meal_time(t_philo *philo)
 {
 	long	last_meal;
 
-	pthread_mutex_lock(&philo->last_meal_mtx);
+	pthread_mutex_lock(philo->last_meal_mtx);
 	last_meal = philo->last_meal_time;
-	pthread_mutex_unlock(&philo->last_meal_mtx);
+	pthread_mutex_unlock(philo->last_meal_mtx);
 	return (last_meal);
 }
 
@@ -26,9 +26,9 @@ int     get_nb_meals(t_philo *philo)
 {
 	int	meal_counter;
 
-	pthread_mutex_lock(&philo->nb_meals_mtx);
+	pthread_mutex_lock(philo->nb_meals_mtx);
 	meal_counter = philo->nb_meals;
-	pthread_mutex_unlock(&philo->nb_meals_mtx);
+	pthread_mutex_unlock(philo->nb_meals_mtx);
 	return (meal_counter);
 }
 
@@ -36,9 +36,9 @@ bool	get_full_state(t_philo *philo)
 {
 	bool	full;
 
-	pthread_mutex_lock(&philo->full_state_mtx);
+	pthread_mutex_lock(philo->full_state_mtx);
 	full = philo->full;
-	pthread_mutex_unlock(&philo->full_state_mtx);
+	pthread_mutex_unlock(philo->full_state_mtx);
 	return (full);
 }
 

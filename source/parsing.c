@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:36:02 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/23 14:36:33 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:53:17 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,15 @@ int	check_parsing(int ac, char **av)
 
 	if (ac < 5 || ac > 6)
 		return (ft_error("Need between 4 and 5 numeric arguments."));
-	i = 1;
+	i = 0;
 	while (av[i])
 	{
-		if (av[i] == NULL || av[i] == (void *) '\0')
-			return (ft_error("Empty String is not a valid argument."));
-		if (looks_like_an_int(av[i]) == FAILURE)
-			return (ft_error("Looks like some arg are not valid int."));
-		else
+		//TODO: deplacer le check arg vide et message d'erru\eur apres le atol
+		// if (av[i] == NULL || av[i] == '\0')
+		// 	return (ft_error("Empty String is not a valid argument."));
+		// if (looks_like_an_int(av[i]) == FAILURE)
+		// 	return (ft_error("Looks like some arg are not valid int."));
+		// else
 		{
 			long_to_check = ft_atol(av[i]);
 			if (is_negative(long_to_check) == true)

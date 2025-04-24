@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:21:18 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/23 16:16:56 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/24 15:54:23 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,20 @@ int	bon_appetit(t_philo *philo)
 	meal_length = philo->data->time_to_eat * 1000;
 	if (is_simulation_over(philo))
 	{
-		bring_back_our_sticks(philo);
+		bring_back_our_forks(philo);
 		return (FAILURE);
 	}
 	printf("%ld %i is eating\n", get_time() - philo->data->start_time,
 		philo->number);
 	philo->last_meal_time = get_time();
 	usleep(meal_length);
-	bring_back_our_sticks(philo);
+	bring_back_our_forks(philo);
 	philo->nb_meals++;
 	if (philo->nb_meals > 0 && philo->nb_meals == philo->data->nb_time_must_eat)
 	{
-		pthread_mutex_lock(&philo->full_state_mtx);
+		pthread_mutex_lock(philo->full_state_mtx);
 		philo->full = true;
-		pthread_mutex_unlock(&philo->full_state_mtx);
+		pthread_mutex_unlock(philo->full_state_mtx);
 		return (FAILURE);
 	}
 	return (SUCCESS);
@@ -54,19 +54,21 @@ int	bon_appetit(t_philo *philo)
 int	deep_thought_odd(t_philo *philo)
 {
 	if (is_simulation_over(philo))
-	{
-		bring_back_our_sticks(philo);
 		return (FAILURE);
-	}
 	pthread_mutex_lock(philo->left_fork);
-	printf("%ld %i has taken a fork\n", get_time()
-		- philo->data->start_time, philo->number);
 	if (is_simulation_over(philo))
 	{
-		bring_back_our_sticks(philo);
+		pthread_mutex_unlock(philo->left_fork);	
 		return (FAILURE);
 	}
+	printf("%ld %i has taken a fork\n", get_time()
+		- philo->data->start_time, philo->number);
 	pthread_mutex_lock(&philo->right_fork);
+	if (is_simulation_over(philo))
+	{
+		bring_back_our_forks(philo);
+		return (FAILURE);
+	}
 	printf("%ld %i has taken a fork\n", get_time()
 		- philo->data->start_time, philo->number);
 	return (SUCCESS);
@@ -74,21 +76,23 @@ int	deep_thought_odd(t_philo *philo)
 
 int	deep_thought_even(t_philo *philo)
 {
-	usleep(5);
+	usleep(10);
+	if (is_simulation_over(philo))
+		return (FAILURE);
+	pthread_mutex_lock(&philo->right_fork);
 	if (is_simulation_over(philo))
 	{
-		bring_back_our_sticks(philo);
+		pthread_mutex_unlock(&philo->right_fork);	
 		return (FAILURE);
 	}
-	pthread_mutex_lock(&philo->right_fork);
 	printf("%ld %i has taken a fork\n", get_time()
 		- philo->data->start_time, philo->number);
+	pthread_mutex_lock(philo->left_fork);
 	if (is_simulation_over(philo))
 	{
-		bring_back_our_sticks(philo);
+		bring_back_our_forks(philo);
 		return (FAILURE);
 	}
-	pthread_mutex_lock(philo->left_fork);
 	printf("%ld %i has taken a fork\n", get_time()
 		- philo->data->start_time, philo->number);
 	return (SUCCESS);
@@ -96,6 +100,9 @@ int	deep_thought_even(t_philo *philo)
 
 int	deep_thought(t_philo *philo)
 {
+	long	thinking_time;
+
+	thinking_time = 0;
 	if (is_simulation_over(philo))
 		return (FAILURE);
 	printf("%ld %i is thinking\n", get_time() - philo->data->start_time,

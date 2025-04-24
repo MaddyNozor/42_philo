@@ -6,13 +6,13 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:21:18 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/23 15:07:44 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/24 11:55:25 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-void	bring_back_our_sticks(t_philo *philo)
+void	bring_back_our_forks(t_philo *philo)
 {
 	if (philo->number % 2 == 0)
 	{
@@ -41,7 +41,7 @@ void	bring_back_our_sticks(t_philo *philo)
 // 			- philo->data->start_time, philo->number);
 // 		if (is_simulation_over(philo))
 // 		{
-// 			bring_back_our_sticks(philo);
+// 			bring_back_our_forks(philo);
 // 			return (FAILURE);
 // 		}
 // 		pthread_mutex_lock(&philo->right_fork);
@@ -58,7 +58,7 @@ void	bring_back_our_sticks(t_philo *philo)
 // 			- philo->data->start_time, philo->number);
 // 		if (is_simulation_over(philo))
 // 		{
-// 			bring_back_our_sticks(philo);
+// 			bring_back_our_forks(philo);
 // 			return (FAILURE);
 // 		}
 // 		pthread_mutex_lock(philo->left_fork);

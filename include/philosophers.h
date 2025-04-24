@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:29:11 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/23 16:08:30 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/24 15:41:29 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ typedef struct s_philo
 	t_data_table	*data;
 	t_mutex			right_fork;
 	t_mutex			*left_fork;
-	t_mutex			last_meal_mtx;
-	t_mutex			nb_meals_mtx;
-	t_mutex			full_state_mtx;
+	t_mutex			*last_meal_mtx;
+	t_mutex			*nb_meals_mtx;
+	t_mutex			*full_state_mtx;
 	t_thread		id_thread;
 	long			last_meal_time;
 	long			time_to_eat;
@@ -57,6 +57,9 @@ typedef struct s_data_table
 {
 	t_philo			*agora;
 	t_mutex			sim_over_mtx;
+	t_mutex			last_meal_mtx;
+	t_mutex			nb_meals_mtx;
+	t_mutex			full_state_mtx;
 	long			start_time;
 	int				nb_philo;
 	int				time_to_die;
@@ -87,7 +90,7 @@ int		bon_appetit(t_philo *philo);
 int		deep_thought(t_philo *philo);
 int		death_has_come(t_data_table *data);
 bool	no_more_pasta_needed(t_data_table *data);
-void	bring_back_our_sticks(t_philo *philo);
+void	bring_back_our_forks(t_philo *philo);
 long	get_last_meal_time(t_philo *philo);
 int		get_nb_meals(t_philo *philo);
 bool	get_full_state(t_philo *philo);
