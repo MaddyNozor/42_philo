@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:21:18 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/24 19:30:07 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/24 19:36:58 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,11 @@ int	deep_thought(t_philo *philo)
 	thinking_time = 0;
 	if (is_simulation_over(philo))
 		return (FAILURE);
-		
 	if (philo->data->nb_philo % 2 != 0
 		&& philo->time_to_eat > philo->time_to_sleep)
 		thinking_time = philo->time_to_eat - philo->time_to_sleep;
-		
 	printf("%ld %i is thinking\n", get_time() - philo->data->start_time,
 		philo->number);
-		
 	if (philo->number % 2 != 0)
 		ft_usleep(5 + thinking_time, philo);
 	else
