@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:03:50 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/24 21:15:16 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/24 22:34:38 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 int	death_has_come(t_data_table *data)
 {
 	int	i;
+	int tt_die_copy;
 
 	i = 1;
+	tt_die_copy = data->time_to_die;
 	while (i <= data->nb_philo && !data->sim_is_over)
 	{
-		if (get_time() - data->agora[i].last_meal_time > data->time_to_die)
+		if (get_time() - get_last_meal_time(&data->agora[i]) > tt_die_copy)
 		{
 			pthread_mutex_lock(&data->sim_over_mtx);
 			data->sim_is_over = true;
