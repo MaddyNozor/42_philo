@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:36:02 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/24 19:14:18 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/24 20:01:06 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ int	looks_like_an_int(char *str)
 
 	i = 0;
 	nb_len = 0;
-	while (ft_is_whitespace(str[i]) == true)
-		i++;
 	if (str[i] == '\'' || str[i] == '\"')
+		i++;
+	while (ft_is_whitespace(str[i]) == true)
 		i++;
 	if ((str[i] == '+' || str[i] == '-') && (str[i + 1]))
 		i++;
@@ -90,6 +90,8 @@ int	check_parsing(int ac, char **av)
 	while (av[i])
 	{
 		{
+			if (looks_like_an_int(av[i]) == FAILURE)
+				return (ft_error("Arg must be true int !"));
 			long_to_check = ft_atol(av[i]);
 			if (long_to_check == 0)
 				return (ft_error("Empty String is not a valid argument."));

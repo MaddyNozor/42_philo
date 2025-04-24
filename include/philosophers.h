@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:29:11 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/24 19:24:59 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/24 22:03:07 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,15 @@ typedef struct s_philo
 	t_mutex			*nb_meals_mtx;
 	t_mutex			*full_state_mtx;
 	t_thread		id_thread;
+	long			start_time;
 	long			last_meal_time;
 	long			time_to_eat;
 	long			time_to_sleep;
+	long			time_to_die;
 	int				number;
 	int				nb_meals;
+	int				nb_time_must_eat;
+	int				nb_philo;
 	bool			first_turn;
 	bool			full;
 }				t_philo;
@@ -61,6 +65,7 @@ typedef struct s_data_table
 	t_mutex			last_meal_mtx;
 	t_mutex			nb_meals_mtx;
 	t_mutex			full_state_mtx;
+	t_mutex			print_mtx;
 	long			start_time;
 	int				nb_philo;
 	int				time_to_die;
@@ -98,6 +103,7 @@ int		get_nb_meals(t_philo *philo);
 bool	get_full_state(t_philo *philo);
 bool	is_simulation_over(t_philo *philo);
 void	ft_clean_exit(t_data_table *data);
+void	print_safe(t_philo *philo, char *msg);
 
 #endif
 
