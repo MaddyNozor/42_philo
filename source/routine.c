@@ -6,7 +6,7 @@
 /*   By: mairivie <mairivie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:21:18 by mairivie          #+#    #+#             */
-/*   Updated: 2025/04/24 22:05:28 by mairivie         ###   ########.fr       */
+/*   Updated: 2025/04/25 12:32:37 by mairivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ bool	take_forks(t_philo *philo)
 	{
 		pthread_mutex_lock(philo->left_fork);
 		if (philo->nb_philo == 1 || is_simulation_over(philo))
-			return (pthread_mutex_unlock(&philo->right_fork), false);
+			return (pthread_mutex_unlock(philo->left_fork), false);
 		print_safe(philo, "has taken a fork\n");
 		pthread_mutex_lock(&philo->right_fork);
 		print_safe(philo, "has taken a fork\n");
